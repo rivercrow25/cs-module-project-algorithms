@@ -4,22 +4,20 @@ Returns: an integer
 '''
 
 
-def eating_cookies(n):
+def eating_cookies(n, cache=None):
     # Your code here
-    if n == 0 or n == 1:
+    if n < 0:
+        return 0
+    elif n == 0:
         return 1
-    elif n == 2:
-        return 2
+    elif cache is not None and cache[n] > 0:
+        return cache[n]
     else:
-        return eating_cookies(n - 3) + eating_cookies(n - 2) + eating_cookies(n - 1)
-    """
-    notes so u cant say i dont understand it :D
-    we start with 2 base cases, if n is 1 or 0 and if n is 2
-    in those cases the the count can only increase by 1 determined amount
-    but what if n is 3 or greater? things get exponetially bigger so we reduce n by using recursion until it reaches the base case
-    by all allowed increments
-    as it comes back up you reach the sum of all possible moves
-    """
+        if cache is None:
+            cache = [0 for i in range(n+1)]
+        cache[n] = eating_cookies(
+            n-1, cache) + eating_cookies(n-2, cache) + eating_cookies(n-3, cache)
+    return cache[n]
 
 
 if __name__ == "__main__":
