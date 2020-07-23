@@ -6,19 +6,23 @@ Returns: a List of integers
 
 def product_of_all_other_numbers(arr):
     # Your code here
-    # plan:
-    # itterate over the array
-    # nest an itteration
-    # check if current nested index is the same as outter index if not multiply outer index by inner index
+    n = len(arr)
+    if n == 1:
+        return arr
+    i, temp = 1, 1
 
-    newarr = []
-    for i in range(len(arr)):
-        var = 1
-        for j in range(len(arr)):
-            if j != i:
-                var = var * arr[j]
-        newarr.append(var)
-    return newarr
+    prod = [1 for i in range(n)]
+
+    for i in range(n):
+        prod[i] = temp
+        temp *= arr[i]
+
+    temp = 1
+
+    for i in range(n - 1, -1, -1):
+        prod[i] *= temp
+        temp *= arr[i]
+    return prod
 
 
 if __name__ == '__main__':
