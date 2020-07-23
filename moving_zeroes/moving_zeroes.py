@@ -2,10 +2,22 @@
 Input: a List of integers
 Returns: a List of integers
 '''
+
+
 def moving_zeroes(arr):
     # Your code here
-
-    pass
+    # plan
+    # itterate through the list
+    # swap the element to a counters index
+    # when an element is not zero increment a counter
+    counter = 0
+    for i in range(len(arr)):
+        if arr[i] is not 0:
+            last = arr[counter]
+            arr[counter] = arr[i]
+            arr[i] = last
+            counter += 1
+    return arr
 
 
 if __name__ == '__main__':
